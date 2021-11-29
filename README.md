@@ -2,13 +2,13 @@
 
 ## How does it work?
 
-\- No magic involved here, `nameddict.NamedDict` is a subclass of dict.
-only the `__getattribute__` and `__setattr__`have been replaced, and thats
+\- No magic involved here, `nameddict.NamedDict` is a just subclass of dict,
+only the `__getattribute__` and `__setattr__` have been replaced, and thats
 where the *magic* happens.
 
 ## How to create a `NamedDict`?
 
-Well its as imple as this -
+Well its as simple as this -
 
 ```pycon
 >>> import namedtuple.NamedDict as NamedDict
@@ -32,3 +32,9 @@ Well its as imple as this -
 
 > NOTE: These type hints currently mean nothing!\
 > defining certain keys doesn't mean that you cannot have "anonymous" keys.
+> I do have plans on releasing an extention that provides some utilities for
+> `NamedDict`s but not now.
+
+## How to install?
+
+Well simply download the [`nameddict.py`](https://raw.githubusercontent.com/arHSM/NamedDict/master/nameddict.py) file and put it in your project folder, then import it like just any other file!
