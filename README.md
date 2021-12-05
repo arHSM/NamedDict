@@ -11,7 +11,7 @@ where the *magic* happens.
 Well its as simple as this -
 
 ```pycon
->>> import namedtuple.NamedDict as NamedDict
+>>> import nameddict.NamedDict as NamedDict
 >>>
 >>>
 >>> class Data(NamedDict):
