@@ -5,7 +5,7 @@ from typing import Any
 
 class NamedDict(dict):
     """
-    `NamedDict` is a subcalss of `dict`, but it replaces 
+    `NamedDict` is a subclass of `dict`, but it replaces 
     `__getattribute__` and `__setattr__`.
 
     Methods -
