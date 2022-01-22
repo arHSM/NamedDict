@@ -75,7 +75,7 @@ class NamedDict(dict):
 
 
 class NamedDictMeta(type):
-    def __new__(cls, name: str, bases: tuple, namespace: dict) -> NamedDict:  # type: ignore
+    def __new__(cls, name: str, bases: tuple, namespace: dict) -> NamedDict:
 
         namespace["__slots__"] = set()
         namespace["__mapping__"] = {}
@@ -87,4 +87,4 @@ class NamedDictMeta(type):
 
             namespace["__mapping__"][attribute] = default
 
-        return type.__new__(NamedDictMeta, name, bases, namespace)  # type: ignore
+        return type.__new__(NamedDictMeta, name, bases, namespace)
