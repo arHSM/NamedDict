@@ -38,36 +38,36 @@ class NamedDict(dict):
     __mapping__: Dict[str, Any]
 
     def __init__(self, **kwargs):
-        try:
+        if hasattr(self, "__mapping__"):
             for name, default in self.__mapping__.items():
                 value = kwargs.get(name, default)
                 self.__setattr__(name, value)
-        except AttributeError:
+        else:
             super().__init__(**kwargs)
 
     def __getattribute__(self, __name: str) -> Any:
         try:
             return super().__getattribute__(__name)
         except AttributeError:
-            try:
+            if hasattr(self, "__mapping__"):
                 if __name in self.__mapping__:
                     return super().__getitem__(__name)
                 else:
                     raise AttributeError(
                         f"{self.__class__.__name__} has no attribute {__name}."
                     ) from None
-            except AttributeError:
+            else:
                 return super().__getitem__(__name)
 
     def __setattr__(self, __name: str, __value: Any) -> None:
-        try:
+        if hasattr(self, "__mapping__"):
             if __name in self.__mapping__:
                 return super().__setitem__(__name, __value)
             else:
                 raise AttributeError(
                     f"{self.__class__.__name__} has no attribute {__name}."
                 )
-        except AttributeError:
+        else:
             return super().__setitem__(__name, __value)
 
     def __repr__(self) -> str:
@@ -80,12 +80,7 @@ class NamedDictMeta(type):
         namespace["__slots__"] = set()
         namespace["__mapping__"] = {}
 
-        try:
-            temp_ns = namespace["__annotations__"].copy()
-        except KeyError:
-            return type.__new__(cls, name, bases, namespace)  # type: ignore
-
-        for attribute in temp_ns:
+        for attribute in namespace.get("__annotations__", {}):
             default = None
             if attribute in namespace:
                 default = namespace.pop(attribute)
