@@ -81,9 +81,7 @@ class NamedDictMeta(type):
         namespace["__mapping__"] = {}
 
         for attribute in namespace.get("__annotations__", {}):
-            default = None
-            if attribute in namespace:
-                default = namespace.pop(attribute)
+            default = namespace.pop(attribute, None)
 
             namespace["__mapping__"][attribute] = default
 
